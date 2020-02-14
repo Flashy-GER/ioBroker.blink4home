@@ -1,0 +1,79 @@
+{
+	"common": {
+		"name": "blink4home",
+		"version": "0.0.1",
+		"news": {
+			"0.0.1": {
+				"en": "initial release",
+				"de": "Erstveröffentlichung",
+				"ru": "Начальная версия",
+				"pt": "lançamento inicial",
+				"nl": "Eerste uitgave",
+				"fr": "Première version",
+				"it": "Versione iniziale",
+				"es": "Versión inicial",
+				"pl": "Pierwsze wydanie",
+				"zh-cn": "首次出版"
+			}
+		},
+		"title": "Blink4Home",
+		"titleLang": {
+			"en": "Blink4Home",
+			"de": "Blink4Home",
+			"ru": "Blink4Home",
+			"pt": "Blink4Home",
+			"nl": "Blink4Home",
+			"fr": "Blink4Home",
+			"it": "Blink4Home",
+			"es": "Blink4Home",
+			"pl": "Blink4Home",
+			"zh-cn": "闪烁4首页"
+		},
+		"desc": {
+			"en": "Adapter for Amazon Blink security system",
+			"de": "Adapter für das Amazon Blink-Sicherheitssystem",
+			"ru": "Адаптер для системы безопасности Amazon Blink",
+			"pt": "Adaptador para sistema de segurança Amazon Blink",
+			"nl": "Adapter voor Amazon Blink beveiligingssysteem",
+			"fr": "Adaptateur pour système de sécurité Amazon Blink",
+			"it": "Adattatore per sistema di sicurezza Amazon Blink",
+			"es": "Adaptador para sistema de seguridad Amazon Blink",
+			"pl": "Adapter do systemu bezpieczeństwa Amazon Blink",
+			"zh-cn": "适用于Amazon Blink安全系统的适配器"
+		},
+		"authors": [
+			"Alex.0 <flashy@openuav.de>"
+		],
+		"keywords": [
+			"blink",
+			"camera",
+			"alarm",
+			"iot"
+		],
+		"license": "MIT",
+		"platform": "Javascript/Node.js",
+		"main": "main.js",
+		"icon": "blink4home.png",
+		"enabled": true,
+		"extIcon": "https://raw.githubusercontent.com/Flashy-GER/ioBroker.blink4home/master/admin/blink4home.png",
+		"readme": "https://github.com/Flashy-GER/ioBroker.blink4home/blob/master/README.md",
+		"loglevel": "info",
+		"mode": "daemon",
+		"type": "alarm",
+		"compact": true,
+		"connectionType": "cloud",
+		"dataSource": "poll",
+		"materialize": true,
+		"dependencies": [
+			{
+				"js-controller": ">=1.4.2"
+			}
+		]
+	},
+	"native": {
+		"option1": true,
+		"option2": "42"
+	},
+	"objects": [],
+	"instanceObjects": []
+}
