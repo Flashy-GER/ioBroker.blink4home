@@ -19,7 +19,8 @@
     "url": "https://github.com/Flashy-GER/ioBroker.blink4home"
   },
   "dependencies": {
-    "@iobroker/adapter-core": "^2.2.1"
+    "@iobroker/adapter-core": "^2.2.1",
+    "node-blink-security": "2.0.2"
   },
   "devDependencies": {
     "@iobroker/testing": "^2.0.2",

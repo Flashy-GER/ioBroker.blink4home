@@ -9,7 +9,7 @@
 const utils = require('@iobroker/adapter-core');
 
 // Load your modules here, e.g.:
-// const fs = require("fs");
+const blinkapi = require('node-blink-security');
 
 class Blink4home extends utils.Adapter {
 
@@ -21,24 +21,29 @@ class Blink4home extends utils.Adapter {
 			...options,
 			name: 'blink4home',
 		});
-		this.on('ready', this.onReady.bind(this));
-		this.on('objectChange', this.onObjectChange.bind(this));
+		this.on('ready', this.onAdapterStart.bind(this));
 		this.on('stateChange', this.onStateChange.bind(this));
-		// this.on('message', this.onMessage.bind(this));
-		this.on('unload', this.onUnload.bind(this));
+		this.on('unload', this.onAdapterStop.bind(this));
 	}
 
 	/**
 	 * Is called when databases are connected and adapter received configuration.
 	 */
-	async onReady() {
+	async onAdapterStart() {
 		// Initialize your adapter here
 
-		// The adapters config (in the instance object everything under the attribute "native") is accessible via
-		// this.config:
-		this.log.info('config option1: ' + this.config.option1);
-		this.log.info('config option2: ' + this.config.option2);
+		// this.config: User defined configurations
+		this.log.debug('config Username: ' + this.config.username);
+		this.log.debug('config Password: ' + '*****************');
+		this.log.debug('config Interval: ' + this.config.interval);
+		this._authtoken = '';
 
+		//initale Blink authentification
+		this.blink = new blinkapi(this.config.username, this.config.password);
+
+		// all states changes inside the adapters namespace are subscribed
+		this.subscribeStates('*');
+		
 		/*
 		For every state in the system there has to be also an object of type state
 		Here a simple template for a boolean variable named "testVariable"
@@ -55,9 +60,6 @@ class Blink4home extends utils.Adapter {
 			},
 			native: {},
 		});
-
-		// in this template all states changes inside the adapters namespace are subscribed
-		this.subscribeStates('*');
 
 		/*
 		setState examples
@@ -85,7 +87,7 @@ class Blink4home extends utils.Adapter {
 	 * Is called when adapter shuts down - callback has to be called under any circumstances!
 	 * @param {() => void} callback
 	 */
-	onUnload(callback) {
+	onAdapterStop(callback) {
 		try {
 			this.log.info('cleaned everything up...');
 			callback();

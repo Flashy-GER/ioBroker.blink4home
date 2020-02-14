@@ -66,13 +66,14 @@
 		"materialize": true,
 		"dependencies": [
 			{
-				"js-controller": ">=1.4.2"
+				"js-controller": ">=2.2.1"
 			}
 		]
 	},
 	"native": {
-		"option1": true,
-		"option2": "42"
+		"username": "",
+		"password": "",
+		"interval": 10
 	},
 	"objects": [],
 	"instanceObjects": []
