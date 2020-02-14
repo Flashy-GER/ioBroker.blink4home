@@ -71,8 +71,8 @@
 		]
 	},
 	"native": {
-		"username": "",
-		"password": "",
+		"username": "your-email@domain.com",
+		"password": "password",
 		"interval": 10
 	},
 	"objects": [],
