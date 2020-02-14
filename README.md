@@ -3,10 +3,12 @@
 
 [![NPM version](http://img.shields.io/npm/v/iobroker.blink4home.svg)](https://www.npmjs.com/package/iobroker.blink4home)
 [![Downloads](https://img.shields.io/npm/dm/iobroker.blink4home.svg)](https://www.npmjs.com/package/iobroker.blink4home)
-![Number of Installations (latest)](http://iobroker.live/badges/blink4home-installed.svg)
-![Number of Installations (stable)](http://iobroker.live/badges/blink4home-stable.svg)
 [![Dependency Status](https://img.shields.io/david/Flashy-GER/iobroker.blink4home.svg)](https://david-dm.org/Flashy-GER/iobroker.blink4home)
 [![Known Vulnerabilities](https://snyk.io/test/github/Flashy-GER/ioBroker.blink4home/badge.svg)](https://snyk.io/test/github/Flashy-GER/ioBroker.blink4home)
+[![Build Status](https://travis-ci.com/Flashy-GER/ioBroker.blink4home.svg?branch=master)](https://travis-ci.com/Flashy-GER/ioBroker.blink4home)
+
+![Number of Installations (latest)](http://iobroker.live/badges/blink4home-installed.svg)
+![Number of Installations (stable)](http://iobroker.live/badges/blink4home-stable.svg)
 
 [![NPM](https://nodei.co/npm/iobroker.blink4home.png?downloads=true)](https://nodei.co/npm/iobroker.blink4home/)
 
