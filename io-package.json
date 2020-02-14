@@ -1,7 +1,7 @@
 {
 	"common": {
 		"name": "blink4home",
-		"version": "0.0.1",
+		"version": "0.1.0",
 		"news": {
 			"0.0.1": {
 				"en": "initial release",
@@ -14,6 +14,18 @@
 				"es": "Versión inicial",
 				"pl": "Pierwsze wydanie",
 				"zh-cn": "首次出版"
+			},
+			"0.1.0": {
+				"en": "Beta Release 1",
+				"de": "Beta Release 1",
+				"ru": "Beta Release 1",
+				"pt": "Beta Release 1",
+				"nl": "Beta Release 1",
+				"fr": "Beta Release 1",
+				"it": "Beta Release 1",
+				"es": "Beta Release 1",
+				"pl": "Pierwsze wydanie",
+				"zh-cn": "Beta Release 1",
 			}
 		},
 		"title": "Blink4Home",

@@ -14,14 +14,19 @@
 
 ## blink4home adapter for ioBroker
 
-Adapter for Amazon Blink security system
+Adapter für das Amazon Blink Kamera security system.
+der Adapter stellt alle Werte in Datenpunkte dar. 
+Arm/Disarm kann über Blockly oder JS gesetzt werden.
 
 ## Manual
 
 Enter Username and Password from your Blink-Cloud account in Adapter Configuration Page
+Den Polling Intervall sollte nicht unter 5 Sek gesetzt werden.
 
 ## Changelog
 
+### 0.1.0
+* (Alex.0) Beta Release 1
 ### 0.0.1
 * (Alex.0) initial release
 

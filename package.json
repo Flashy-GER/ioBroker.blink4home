@@ -1,6 +1,6 @@
 {
   "name": "iobroker.blink4home",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Adapter for Amazon Blink security system",
   "author": {
     "name": "Alex.0",
