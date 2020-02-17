@@ -60,11 +60,11 @@ class Blink4home extends utils.Adapter {
 	}
 
 	createStateObjects(summary){
-		this.log.debug('start creating objects');
+		this.log.debug('start creating blink objects');
 		const promises = [];
-		Object.entries(summary.network).forEach( (networkAttr) => {
-			var key = networkAttr[0];
-			var val = networkAttr[1];
+		Object.entries(summary.networks).forEach( (networkAttr) => {
+			const key = networkAttr[0];
+			const val = networkAttr[1];
 			this.log.debug('creating network object '+summary.network.name+'.'+key);
 			promises.push(this.setObjectNotExistsAsync(summary.network.name+'.'+key, {
 				type: 'state',
@@ -82,9 +82,10 @@ class Blink4home extends utils.Adapter {
 		});
 
 		summary.devices.forEach( (device) => {
+			this.log.debug('start collecting devices');
 			Object.entries(device).forEach( (deviceAttr) => {
-				var key = deviceAttr[0];
-				var val = deviceAttr[1];
+				const key = deviceAttr[0];
+				const val = deviceAttr[1];
 				promises.push(this.setObjectNotExistsAsync(summary.network.name+'.'+device.name+'.'+key, {
 					type: 'state',
 					common: {
@@ -105,14 +106,14 @@ class Blink4home extends utils.Adapter {
 	
 	updateStatesFromSummary(summary){
 		Object.entries(summary.network).forEach( (networkAttr) => {
-			var key = networkAttr[0];
-			var val = networkAttr[1];
+			const key = networkAttr[0];
+			const val = networkAttr[1];
 			this.setState(summary.network.name+'.'+key, val, true);
 		});
 		summary.devices.forEach( (device) => {
 			Object.entries(device).forEach( (deviceAttr) => {
-				var key = deviceAttr[0];
-				var val = deviceAttr[1];
+				const key = deviceAttr[0];
+				const val = deviceAttr[1];
 				this.setState(summary.network.name+'.'+device.name+'.'+key, val, true);
 			});
 		});
@@ -124,19 +125,22 @@ class Blink4home extends utils.Adapter {
 			scope.log.debug('connection set up');
 			scope.blink.getSummary().then((summary) => {
 				scope.log.debug('processing summary');
-				var promises = scope.createStateObjects(summary);
+				const promises = scope.createStateObjects(summary);
 				Promise.all(promises).then(() => {
 					scope.log.debug('update states from summary');
 					scope.updateStatesFromSummary(summary);
 					scope.log.debug('updated states, setting timer in '+intsecs+' seconds');
+					clearTimeout;
 					setTimeout(scope.pollStatusFromBlinkServers, intsecs * 1000, scope, intsecs);
 					scope.log.debug('timer set, all is done');
 				}).catch((err) => {
 					scope.log.error('error: ' + err);
+					clearTimeout;
 					setTimeout(scope.pollStatusFromBlinkServers, intsecs * 1000, scope, intsecs);
 				});
 			},function(error){
 				scope.log.error(error);
+				clearTimeout;
 				setTimeout(scope.pollStatusFromBlinkServers, intsecs * 1000, scope, intsecs);
 			});
 		});
@@ -154,10 +158,10 @@ class Blink4home extends utils.Adapter {
 				return;
 			}
 			this.log.debug(`state ${id} was changed from outside to: ${state.val}`);
-			var idsplit = id.split('.');
-			var statename = idsplit[idsplit.length-1];
+			const idsplit = id.split('.');
+			const statename = idsplit[idsplit.length-1];
 			if(idsplit.length == 4 && statename == 'armed'){
-				var networkname = idsplit[idsplit.length-2];
+				const networkname = idsplit[idsplit.length-2];
 				if(state.val === true) {
 					var statetext = 'armed';
 				} else {
