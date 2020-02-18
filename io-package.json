@@ -76,6 +76,17 @@
 		"connectionType": "cloud",
 		"dataSource": "poll",
 		"materialize": true,
+		"localLink": "/adapter/blink4home/blinkcontrol.html",
+		"adminTab": {
+            "name": {
+                "en": "Blink Camera Control",
+                "de": "Blink Kamera Control",
+				"ru": "Blink управления камерой"
+				},
+			"singleton": false,
+            "ignoreConfigUpdate": true,
+			"fa-icon": "chat"
+		},
 		"dependencies": [
 			{
 				"js-controller": ">=2.2.1"
