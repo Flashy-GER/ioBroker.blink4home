@@ -1,9 +1,63 @@
 <html>
     <head>
 
+    <style type="text/css">
+.auto-style1 {
+	font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+	font-size: x-large;
+}
+.auto-style2 {
+	text-align: center;
+}
+.auto-style3 {
+	font-size: medium;
+}
+.auto-style4 {
+	font-size: large;
+	text-decoration: underline;
+}
+.auto-style5 {
+	font-size: large;
+}
+</style>
+	<script type="text/javascript">
+<!--
+function FP_preloadImgs() {//v1.0
+ var d=document,a=arguments; if(!d.FP_imgs) d.FP_imgs=new Array();
+ for(var i=0; i<a.length; i++) { d.FP_imgs[i]=new Image; d.FP_imgs[i].src=a[i]; }
+}
+
+function FP_swapImg() {//v1.0
+ var doc=document,args=arguments,elm,n; doc.$imgSwaps=new Array(); for(n=2; n<args.length;
+ n+=2) { elm=FP_getObjectByID(args[n]); if(elm) { doc.$imgSwaps[doc.$imgSwaps.length]=elm;
+ elm.$src=elm.src; elm.src=args[n+1]; } }
+}
+
+function FP_getObjectByID(id,o) {//v1.0
+ var c,el,els,f,m,n; if(!o)o=document; if(o.getElementById) el=o.getElementById(id);
+ else if(o.layers) c=o.layers; else if(o.all) el=o.all[id]; if(el) return el;
+ if(o.id==id || o.name==id) return o; if(o.childNodes) c=o.childNodes; if(c)
+ for(n=0; n<c.length; n++) { el=FP_getObjectByID(id,c[n]); if(el) return el; }
+ f=o.forms; if(f) for(n=0; n<f.length; n++) { els=f[n].elements;
+ for(m=0; m<els.length; m++){ el=FP_getObjectByID(id,els[n]); if(el) return el; } }
+ return null;
+}
+// -->
+</script>
+
     </head>
-    <body>
-        Blink Camera Control Panel
+    <body class="auto-style1" onload="FP_preloadImgs(/*url*/'button6.jpg',/*url*/'button7.jpg',/*url*/'button9.jpg',/*url*/'buttonA.jpg')">
+        <div class="auto-style2">
+			<img alt="" height="51" src="blinksmall.png" style="float: right" width="60"><strong>Blink Camera Control Panel</strong></div>
+		<p>&nbsp;</p>
+		<p class="auto-style3">letzter Screenshot:</p>
+		<p>&nbsp;</p>
+		<hr>
+		<p class="auto-style4"><strong>Controls:</strong></p>
+		<p class="auto-style5">
+		<img id="img1" alt="Arm" fp-style="fp-btn: Metal Capsule 2; fp-font-style: Bold" fp-title="Arm" height="20" onmousedown="FP_swapImg(1,0,/*id*/'img1',/*url*/'button7.jpg')" onmouseout="FP_swapImg(0,0,/*id*/'img1',/*url*/'button5.jpg')" onmouseover="FP_swapImg(1,0,/*id*/'img1',/*url*/'button6.jpg')" onmouseup="FP_swapImg(0,0,/*id*/'img1',/*url*/'button6.jpg')" src="button5.jpg" style="border: 0" width="100">&nbsp;&nbsp;
+		<img id="img2" alt="Disarm" fp-style="fp-btn: Metal Capsule 3; fp-font-style: Bold" fp-title="Disarm" height="20" onmousedown="FP_swapImg(1,0,/*id*/'img2',/*url*/'buttonA.jpg')" onmouseout="FP_swapImg(0,0,/*id*/'img2',/*url*/'button8.jpg')" onmouseover="FP_swapImg(1,0,/*id*/'img2',/*url*/'button9.jpg')" onmouseup="FP_swapImg(0,0,/*id*/'img2',/*url*/'button9.jpg')" src="button8.jpg" style="border: 0" width="100"></p>
+		<hr>
     </body>
 
 
