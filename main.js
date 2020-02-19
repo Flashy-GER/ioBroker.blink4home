@@ -62,7 +62,7 @@ class Blink4home extends utils.Adapter {
 	createStateObjects(summary){
 		this.log.debug('start creating blink objects');
 		const promises = [];
-		Object.entries(summary.networks).forEach( (networkAttr) => {
+		Object.entries(summary.network).forEach( (networkAttr) => {
 			const key = networkAttr[0];
 			const val = networkAttr[1];
 			this.log.debug('creating network object '+summary.network.name+'.'+key);
