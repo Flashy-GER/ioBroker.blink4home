@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@iobroker/adapter-core": "^2.2.1",
-    "node-blink-security": "^3.0.6"
+    "node-blink-security": "^2.0.2"
   },
   "devDependencies": {
     "@iobroker/testing": "^2.0.2",
