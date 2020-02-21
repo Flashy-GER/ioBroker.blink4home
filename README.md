@@ -1,4 +1,4 @@
-![Logo](admin/blink4home.png)
+![Logo](admin/blinkbanner.png)
 # ioBroker.blink4home
 
 [![NPM version](http://img.shields.io/npm/v/iobroker.blink4home.svg)](https://www.npmjs.com/package/iobroker.blink4home)
@@ -22,6 +22,7 @@ Arm/Disarm kann über Blockly oder JS gesetzt werden.
 
 Enter Username and Password from your Blink-Cloud account in Adapter Configuration Page
 Den Polling Intervall sollte nicht unter 5 Sek gesetzt werden.
+
 
 ## Changelog
 
