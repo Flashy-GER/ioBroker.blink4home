@@ -1,6 +1,6 @@
 {
   "name": "iobroker.blink4home",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Adapter for Amazon Blink security system",
   "author": "Alex.0 <flashy@openuav.de>",
   "homepage": "https://github.com/Flashy-GER/ioBroker.blink4home",

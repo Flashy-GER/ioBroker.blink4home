@@ -20,15 +20,22 @@ Arm/Disarm kann über Blockly oder JS gesetzt werden.
 
 ## Manual
 
-Enter Username and Password from your Blink-Cloud account in Adapter Configuration Page
+Username and Passwort des Blink-Cloud accounts in Adapter Konfiguration Page eintragen.
 Den Polling Intervall sollte nicht unter 5 Sek gesetzt werden.
+Wenn arm/disarm über ebenfalls manuell über Datenpunkt gesetzt werden soll, einfach selbständig Schreibrechte vergeben.
+für Scriptbasierte Steuerung ist das nicht nötig.
 
+## ToDos
+* Control Panel überarbeiten (Anzeige von letzen Foto, Abrufen der Videos, Arm/Disarm, Kamerabezogene Motion Detection u.a.)
 
 ## Changelog
 
+### 0.1.1
+* (Alex.0) add Control Site (under Construction)
+* (Alex.0) some fixes
 ### 0.1.0
 * (Alex.0) Beta Release 1
-### 0.0.1
+### 0.0.1 Inital Release
 * (Alex.0) initial release
 
 ## License
