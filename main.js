@@ -9,7 +9,7 @@
 const utils = require('@iobroker/adapter-core');
 
 // Load your modules here, e.g.:
-const blinkapi = require('node-blink-security');
+const BlinkAPI = require('node-blink-security');
 
 class Blink4home extends utils.Adapter {
 
@@ -24,6 +24,7 @@ class Blink4home extends utils.Adapter {
 		this.on('ready', this.onAdapterStart.bind(this));
 		this.on('stateChange', this.onStateChange.bind(this));
 		this.on('unload', this.onAdapterStop.bind(this));
+		this.timeout = null;
 	}
 
 	/**
@@ -34,12 +35,12 @@ class Blink4home extends utils.Adapter {
 
 		// this.config: User defined configurations
 		this.log.debug('config Username: ' + this.config.username);
-		this.log.debug('config Password: ' + '*****************');
+		this.log.debug('config Password: ' + (this.config.password ? '*****************' : 'empty!'));
 		this.log.debug('config Interval: ' + this.config.interval);
 		this._authtoken = '';
 
-		//initale Blink authentification
-		this.blink = new blinkapi(this.config.username, this.config.password);
+		// inital Blink authentification
+		this.blink = new BlinkAPI(this.config.username, this.config.password);
 
 		// all states changes inside the adapters namespace are subscribed
 		this.pollStatusFromBlinkServers(this, this.config.interval);
@@ -52,7 +53,7 @@ class Blink4home extends utils.Adapter {
 	 */
 	onAdapterStop(callback) {
 		try {
-			this.log.info('cleaned everything up...');
+			this.timeout && clearTimeout(this.timeout);
 			callback();
 		} catch (e) {
 			callback();
@@ -60,11 +61,11 @@ class Blink4home extends utils.Adapter {
 	}
 
 	createStateObjects(summary){
-		this.log.debug('start creating objects');
+		this.log.debug('start creating blink objects');
 		const promises = [];
 		Object.entries(summary.network).forEach( (networkAttr) => {
-			var key = networkAttr[0];
-			var val = networkAttr[1];
+			const key = networkAttr[0];
+			const val = networkAttr[1];
 			this.log.debug('creating network object '+summary.network.name+'.'+key);
 			promises.push(this.setObjectNotExistsAsync(summary.network.name+'.'+key, {
 				type: 'state',
@@ -82,9 +83,10 @@ class Blink4home extends utils.Adapter {
 		});
 
 		summary.devices.forEach( (device) => {
+			this.log.debug('start collecting devices');
 			Object.entries(device).forEach( (deviceAttr) => {
-				var key = deviceAttr[0];
-				var val = deviceAttr[1];
+				const key = deviceAttr[0];
+				const val = deviceAttr[1];
 				promises.push(this.setObjectNotExistsAsync(summary.network.name+'.'+device.name+'.'+key, {
 					type: 'state',
 					common: {
@@ -105,14 +107,14 @@ class Blink4home extends utils.Adapter {
 	
 	updateStatesFromSummary(summary){
 		Object.entries(summary.network).forEach( (networkAttr) => {
-			var key = networkAttr[0];
-			var val = networkAttr[1];
+			const key = networkAttr[0];
+			const val = networkAttr[1];
 			this.setState(summary.network.name+'.'+key, val, true);
 		});
 		summary.devices.forEach( (device) => {
 			Object.entries(device).forEach( (deviceAttr) => {
-				var key = deviceAttr[0];
-				var val = deviceAttr[1];
+				const key = deviceAttr[0];
+				const val = deviceAttr[1];
 				this.setState(summary.network.name+'.'+device.name+'.'+key, val, true);
 			});
 		});
@@ -124,20 +126,23 @@ class Blink4home extends utils.Adapter {
 			scope.log.debug('connection set up');
 			scope.blink.getSummary().then((summary) => {
 				scope.log.debug('processing summary');
-				var promises = scope.createStateObjects(summary);
+				const promises = scope.createStateObjects(summary);
 				Promise.all(promises).then(() => {
 					scope.log.debug('update states from summary');
 					scope.updateStatesFromSummary(summary);
 					scope.log.debug('updated states, setting timer in '+intsecs+' seconds');
-					setTimeout(scope.pollStatusFromBlinkServers, intsecs * 1000, scope, intsecs);
+					scope.timeout && clearTimeout(scope.timeout);
+					scope.timeout = setTimeout(scope.pollStatusFromBlinkServers, intsecs * 1000, scope, intsecs);
 					scope.log.debug('timer set, all is done');
 				}).catch((err) => {
 					scope.log.error('error: ' + err);
-					setTimeout(scope.pollStatusFromBlinkServers, intsecs * 1000, scope, intsecs);
+					scope.timeout && clearTimeout(scope.timeout);
+					scope.timeout = setTimeout(scope.pollStatusFromBlinkServers, intsecs * 1000, scope, intsecs);
 				});
-			},function(error){
+			}, error => {
 				scope.log.error(error);
-				setTimeout(scope.pollStatusFromBlinkServers, intsecs * 1000, scope, intsecs);
+				scope.timeout && clearTimeout(scope.timeout);
+				scope.timeout = setTimeout(scope.pollStatusFromBlinkServers, intsecs * 1000, scope, intsecs);
 			});
 		});
 	}
@@ -150,26 +155,26 @@ class Blink4home extends utils.Adapter {
 	onStateChange(id, state) {
 		if (state) {
 			// The state was changed
-			if(state.ack === true){
+			if (state.ack === true){
 				return;
 			}
 			this.log.debug(`state ${id} was changed from outside to: ${state.val}`);
-			var idsplit = id.split('.');
-			var statename = idsplit[idsplit.length-1];
-			if(idsplit.length == 4 && statename == 'armed'){
-				var networkname = idsplit[idsplit.length-2];
-				if(state.val === true) {
-					var statetext = 'armed';
+			const idsplit = id.split('.');
+			const statename = idsplit[idsplit.length-1];
+			if (idsplit.length === 4 && statename === 'armed') {
+				const networkname = idsplit[idsplit.length-2];
+				let statetext;
+				if (state.val === true) {
+					statetext = 'armed';
 				} else {
-					var statetext = 'disarmed';
+					statetext = 'disarmed';
 				}
 
 				this.log.info('someone '+statetext+' ('+state.val+') the network '+networkname);
 				this.blink.setupSystem(networkname).then(() => {
 					this.blink.setArmed(state.val);
 			
-				},function(error){
-					
+				}, error => {
 					// @ts-ignore
 					this.log.error(error);
 				});

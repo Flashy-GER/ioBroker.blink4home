@@ -1,7 +1,7 @@
 {
 	"common": {
 		"name": "blink4home",
-		"version": "0.1.0",
+		"version": "0.1.1",
 		"news": {
 			"0.0.1": {
 				"en": "initial release",
@@ -26,6 +26,18 @@
 				"es": "Beta Release 1",
 				"pl": "Pierwsze wydanie",
 				"zh-cn": "Beta Release 1"
+			},
+			"0.1.1": {
+				"en": "Beta Release 2",
+				"de": "Beta Release 2",
+				"ru": "Beta Release 2",
+				"pt": "Beta Release 2",
+				"nl": "Beta Release 2",
+				"fr": "Beta Release 2",
+				"it": "Beta Release 2",
+				"es": "Beta Release 2",
+				"pl": "Pierwsze wydanie",
+				"zh-cn": "Beta Release 2"
 			}
 		},
 		"title": "Blink4Home",
@@ -76,6 +88,17 @@
 		"connectionType": "cloud",
 		"dataSource": "poll",
 		"materialize": true,
+		"localLink": "/adapter/blink4home/blinkcontrol.html",
+		"adminTab": {
+            "name": {
+                "en": "Blink Camera Control",
+                "de": "Blink Kamera Control",
+				"ru": "Blink управления камерой"
+				},
+			"singleton": false,
+            "ignoreConfigUpdate": true,
+			"fa-icon": "chat"
+		},
 		"dependencies": [
 			{
 				"js-controller": ">=2.2.1"
