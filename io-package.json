@@ -1,7 +1,7 @@
 {
 	"common": {
 		"name": "blink4home",
-		"version": "0.1.1",
+		"version": "0.1.2",
 		"news": {
 			"0.0.1": {
 				"en": "initial release",
@@ -108,7 +108,7 @@
 	"native": {
 		"username": "your-email@domain.com",
 		"password": "password",
-		"interval": 10
+		"pollingInterval": 10
 	},
 	"objects": [],
 	"instanceObjects": []
