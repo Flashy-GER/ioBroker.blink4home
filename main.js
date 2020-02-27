@@ -21,17 +21,11 @@ class Blink4home extends utils.Adapter {
 			...options,
 			name: 'blink4home',
 		});
+		this.log.debug('begin setup adapter');
 		this.on('ready', this.onAdapterStart.bind(this));
 		this.on('stateChange', this.onStateChange.bind(this));
 		this.on('unload', this.onAdapterStop.bind(this));
 		this.timeout = null;
-	}
-
-	/**
-	 * Is called when databases are connected and adapter received configuration.
-	 */
-	async onAdapterStart() {
-		// Initialize your adapter here
 		this.getForeignObject('system.config', (err, obj) => {
 			if (obj && obj.native && obj.native.secret) {
 				//noinspection JSUnresolvedVariable
@@ -40,8 +34,24 @@ class Blink4home extends utils.Adapter {
 				//noinspection JSUnresolvedVariable
 				this.config.password = decrypt('Zgfr56gFe87jJOM', this.config.password);
 			}
+			this.log.debug('setup encryption');
 		});
 		
+		function decrypt(key, value) {
+			let result = '';
+			for (let i = 0; i < value.length; ++i) {
+				result += String.fromCharCode(key[i % key.length].charCodeAt(0) ^ value.charCodeAt(i));
+			}
+			return result;
+		}
+	}
+
+	/**
+	 * Is called when databases are connected and adapter received configuration.
+	 */
+	async onAdapterStart() {
+		// Initialize your adapter here
+				
 		// this.config: User defined configurations
 		this.log.debug('config Username: ' + this.config.username);
 		this.log.debug('config Password: ' + (this.config.password ? '*****************' : 'empty!'));
@@ -54,14 +64,6 @@ class Blink4home extends utils.Adapter {
 		// all states changes inside the adapters namespace are subscribed
 		this.pollStatusFromBlinkServers(this, this.config.pollingInterval);
 		this.subscribeStates('*');
-
-		function decrypt(key, value) {
-			let result = '';
-			for (let i = 0; i < value.length; ++i) {
-				result += String.fromCharCode(key[i % key.length].charCodeAt(0) ^ value.charCodeAt(i));
-			}
-			return result;
-		}
 
 	}
 
