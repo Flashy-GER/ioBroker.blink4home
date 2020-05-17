@@ -108,7 +108,7 @@
 	"native": {
 		"username": "your-email@domain.com",
 		"password": "password",
-		"interval": 10
+		"pollingInterval": 10
 	},
 	"objects": [],
 	"instanceObjects": []
